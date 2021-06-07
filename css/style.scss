@@ -1,0 +1,200 @@
+$rich-black-fogra-29: rgba(1, 22, 30, 1);
+$midnight-green-eagle-green: rgba(18, 69, 89, 1);
+$teal-blue: rgba(89, 131, 146, 1);
+$alabaster: rgba(220, 229, 221, 1);
+$beige: rgba(239, 246, 224, 1);
+$misty-rose: rgba(254, 240, 225, 1);
+
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-size: 1em;
+	line-height: 1.33em;
+}
+a {
+	color: $midnight-green-eagle-green;
+	&:hover {
+		text-decoration: none;
+	}
+}
+p {
+	margin-bottom: 1.33em;
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+h1 {
+	line-height: 1.33em;
+}
+header {
+	display: flex;
+	h1 {
+		font-weight: normal;
+		width: calc(40% - 40px);
+    	padding: 30px 10px 30px 30px;
+	}
+	.intro_text {
+		width: calc(40% - 40px);
+    	padding: 30px 30px 30px 10px;
+	}
+	.contact {
+		width: calc(20% - 60px);
+    	padding: 30px 30px 30px 30px;
+	}
+}
+.wrapper {
+	width: 100%;
+}
+.biweek_wrapper {
+	position: relative;
+	border-top: 1px solid #eeeeee;
+	&.current {
+	}
+}
+.biweek {
+	display: flex;
+	padding: 20px;
+	width: calc(80% - 40px);
+	position: relative;
+	flex-wrap: wrap;
+}
+.day {
+	width: calc(100% / 4 - 60px);
+	min-width: 190px;
+    padding: 20px;
+    margin: 10px;
+    display: block;
+    vertical-align: top;
+    background-color: #eeeeee;
+    &.done {
+    	background-color: $alabaster;
+    }
+    &.crosstrain {
+    	background-color: $misty-rose;
+    }
+    .date {
+    	text-transform: uppercase;
+    	font-weight: bold;
+    	display: inline;
+    }
+    .run_type {
+    	display: inline;
+    	&:before {
+    		content: '\2022';
+    	}
+    }
+    .milage {
+    	font-size: .85em;
+    	line-height: 1.33em;
+    	text-transform: uppercase;
+    }
+    .run_description {
+    	margin-top: 10px;
+    	font-size: .85em;
+    	line-height: 1.33em;
+    }
+    .related_runs {
+    	font-size: .85em;
+    	line-height: 1.33em;
+    	.related_run {
+    		margin-top: 10px;
+    		.time_of_day {
+	    		display: inline;
+	    		font-weight: bold;
+	    	}
+	    	.run_title {
+	    		display: inline;
+	    		text-transform: uppercase;
+	    		font-weight: bold;
+	    		&:before {
+	    			content: '\2022';
+	    			margin-right: 5px;
+	    			margin-left: 5px;
+	    		}
+	    	}
+	    	.run_data {
+	    		.run_milage {
+	    			display: inline-block;
+	    			margin-right: 15px;
+	    		}
+	    		.run_pace {
+	    			display: inline-block;
+	    			margin-right: 15px;
+	    		}
+	    		.run_elapsed {
+	    			display: inline-block;
+	    		}
+	    	}
+	    	.run_notes {
+	    		margin-top: 10px;
+	    	}
+    	}
+    }
+}
+.bw_totals {
+	position: absolute;
+    left: 80%;
+    top: 0px;
+    padding: 40px 20px;
+    right: 20px;
+    bottom: 00px;
+    border-left: 1px solid #eeeeee;
+    .gift {
+    	margin-top: 1.33em;
+    }
+}
+@media screen and (max-width: 1299px) {
+	.biweek {
+		width: calc(70% - 40px);
+	}
+	.bw_totals {
+		left: 70%;
+	}
+}
+@media screen and (max-width: 1128px) {
+	header {
+		flex-wrap: wrap;
+		h1 {
+			width: calc(100% - 60px);
+    		padding: 30px;
+		}
+		.intro_text {
+			width: calc(70% - 60px);
+    		padding: 30px 30px 30px 30px;
+		}
+		.contact {
+			width: calc(30% - 60px);
+		}
+	}
+	.day {
+		width: calc(100% / 2 - 60px);
+	}
+}
+@media screen and (max-width: 771px) {
+	header {
+		.intro_text {
+			width: calc(100% - 60px);
+			padding-bottom: 0;
+		}
+		.contact {
+			width: calc(100% - 60px);
+		}
+	}
+	.biweek {
+		width: calc(100% - 40px);
+	}
+	.day {
+		width: calc(100% - 60px);
+	}
+	.bw_totals {
+		left: 0;
+	    right: 0;
+	    position: relative;
+	    width: calc(100% - 60px);
+	    border-left: none;
+	    padding: 0px 30px 20px;
+	}
+}
