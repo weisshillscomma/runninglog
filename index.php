@@ -32,13 +32,37 @@ $today_compare = date('Y-m-d', strtotime($today));
 include_once('[UPDATE THE PATH HERE]/Parsedown.php');
 ?>
 
+<?php
+/* Get all the site info */
+$info_query = 'https://api.airtable.com/v0/' . $base . '/Site%20Content?api_key=' . $api . '&view=Grid%20view';
+$info = file_get_contents($info_query);
+$info_parsed = json_decode($info);
+$site_title = $info_parsed->{'records'}[0]->{'fields'}->{'Site Title'};
+$site_intro = $info_parsed->{'records'}[0]->{'fields'}->{'Introduction'};
+if($site_intro){
+	$site_intro = Parsedown::instance()
+				->setBreaksEnabled(true) # enables automatic line breaks
+				->text($site_intro);
+}
+$contact_info = $info_parsed->{'records'}[0]->{'fields'}->{'Contact Info'};
+if($contact_info){
+	$contact_info = Parsedown::instance()
+				->setBreaksEnabled(true) # enables automatic line breaks
+				->text($contact_info);
+}
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width = device-width, initial-scale = 1, maximum-scale = 1, user-scalable = no" name="viewport">
-	<title>I Am Training for the 2021 New York City Marathon</title>
+	<?php if($site_title){ ?>
+		<title><?php echo $site_title; ?></title>
+	<?php } else { ?>
+		<title>Training Plan</title>
+	<?php } ?>
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./css/style.css" media="screen">
 </head>
@@ -97,19 +121,22 @@ include_once('[UPDATE THE PATH HERE]/Parsedown.php');
 	?>
 
 	<header>
-		<h1>I am training for the 2021 New York City Marathon.</h1>
-		<div class="intro_text">
-			<p>It&rsquo;s on.</p>
-		</div>
-		<div class="contact">
-			Contact me at<br>
-			<a href="mailto:johndoe@gmail.com">johndoe@gmail.com</a><br><br>
+		<?php if($site_title) { ?>
+			<h1><?php echo $site_title ?></h1>
+		<?php } else { ?>
+			<h1>Training Plan</h1>
+		<?php } ?>
+		<?php if($site_intro) { ?>
+			<div class="intro_text">
+				<?php echo $site_intro; ?>
+			</div>
+		<?php } ?>
 
-			Follow me on<br>
-			<a href="#" target="_blank">Strava</a><br>
-			<a href="#" target="_blank">Twitter</a><br>
-			<a href="#" target="_blank">Instagram</a>
-		</div>
+		<?php if($contact_info) { ?>
+			<div class="contact">
+				<?php echo $contact_info; ?>
+			</div>
+		<?php } ?>
 	</header>
 	<div class="wrapper">
 
