@@ -1,7 +1,7 @@
 <?php
 /***************
 
-Add you Airtable API key and base below.
+Add your Airtable API key and base below.
 Also, update the path to Parsedown.php
 
 ***************/
